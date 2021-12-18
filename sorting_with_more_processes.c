@@ -1,9 +1,5 @@
 /*
- *  Concurrent Version A:
- *  - Father generate child and wait for him
- *  - Child compare-exchange and quit
- *  Comparison (and exchange) are done before the
- *  new fork on the way down.
+ *  
  */
 #include <stdio.h>
 #include <stdlib.h>
@@ -18,13 +14,13 @@ void child(int fd, int j);
 
 int main(int argc, char* argv[]){
   int fd, n, x;
-  int i,j; //contatori
+  int i,j; //counters
 
   fd = creat (argv[1], 0666);
 
   fd = open(argv[1], O_RDWR);
   if(fd == -1){
-    printf("Error in opening the file...");
+    printf("Error while opening the file...");
     return 1;
   }
 
@@ -64,7 +60,6 @@ void child (int fd,int j){
 
   lseek (fd, j*sizeof (int), SEEK_SET);
   c1 = read (fd, &v1, sizeof (int));
-  //lseek (fd, (j+1)*sizeof (int), SEEK_SET);
   c2 = read (fd, &v2, sizeof (int));
   if (c1<=0 || c2<=0) {
     fprintf (stderr, "Error reading file\n");
@@ -73,7 +68,6 @@ void child (int fd,int j){
   if (v1 > v2) {
     lseek (fd, j*sizeof (int), SEEK_SET);
     c1 = write (fd, &v2, sizeof (int));
-    //lseek (fd, (j+1)*sizeof (int), SEEK_SET);
     c2 = write (fd, &v1, sizeof (int));
   }
 
