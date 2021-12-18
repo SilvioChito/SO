@@ -1,6 +1,7 @@
 /*
- *  
- */
+ Father generates child and waits for him
+ Each child sort a piece of file and then quit 
+*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
