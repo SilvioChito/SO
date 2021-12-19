@@ -1,6 +1,7 @@
 /*
  * Two children communicate 
  * by reading and writing a file
+ * The communication ends when the Sender send the word "end" (THE TWO PROCESSES RETURN)
 */
 
 
@@ -41,6 +42,11 @@ int Receiver(pid_t f1){
   for(int i=0; i<strlen(str); i++)
    str[i] = toupper(str[i]);
   printf("RECEIVER (%d) WOKE UP! Message in capital letter -> %s\n",f1,str);
+  
+  if(strcmp(str,"END")==0){
+   printf("RECEIVER RETURNED SUCESSFULLY !!!\n");
+   return 0;
+  }
   kill(pid_brother,SIGALRM);
  }
  return 0;
@@ -58,6 +64,11 @@ int Sender(int f2, int f1){
   fprintf(fp,"%d %s",f2,str);
   fclose(fp);
   kill(f1,SIGALRM);
+
+  if(strcmp(str,"end")==0){
+   printf("SENDER RETURNED SUCESSFULLY !!!\n");
+   return 0;
+  }
   pause();
  }
  return 0;
@@ -88,4 +99,3 @@ int main(int argc, char* argv[]){
 
  return 0;
 }
-
