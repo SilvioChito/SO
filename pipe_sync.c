@@ -1,6 +1,6 @@
 /*
  * Two pipes are used as a way to synchronyze two processes
- * IN this case no pause/sleep is needed
+ * In this case no pause/sleep is needed
 */
 
 #include <stdio.h>
