@@ -1,5 +1,5 @@
 /*
- * Two pipes are used as a way to syncronyse two processes
+ * Two pipes are used as a way to synchronyze two processes
  * IN this case no pause/sleep is needed
 */
 
