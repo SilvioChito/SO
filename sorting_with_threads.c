@@ -28,7 +28,7 @@ void *SortFile(void *arg){
  vett = (int*) malloc(dim*sizeof(int));
 
  for(i=0; i<dim; i++)
-  fscanf(fp,"%d",&vett[i]); //inserisco nel vettore tutti i dati in un vettore
+  fscanf(fp,"%d",&vett[i]);
 
  //BUBBLE SORT 
  for (i=0; i<dim-1; i++) {
@@ -40,8 +40,7 @@ void *SortFile(void *arg){
     }
   }
  }
-
- //adesso stampo il vettore sui file di uscita (in questo caso li genero ogni volta -> quelli in input li avevo già
+ 
  for(i=0; i<dim; i++)
   fprintf(fp2,"%d\n",vett[i]);
 
@@ -58,10 +57,10 @@ int main(int argc, char* argv[]){
  char tmp[N] = "";
  struct par p[n];
  pthread_t t[n];
- void *status; //per catturare lo stato di ritorno dei vari thread
+ void *status; 
  
  
- for(i=0; i<n; i++){ //genero tutti i file ingresso/uscita su cui lavoreranno i thread
+ for(i=0; i<n; i++){ 
   sprintf(tmp,"%s%d.txt",argv[2],i);
   strcpy(p[i].strI,tmp);
   sprintf(tmp,"%s%d.txt",argv[3],i);
